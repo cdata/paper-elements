@@ -17,7 +17,7 @@
   <template>
     <iron-ajax url="./bower.json" last-response="{{bower}}" auto>
     <section>
-      <span class="name">Combined demo (if avaialable)</span> &middot; <a href="demo" target="_blank">Demo</a>
+      <span class="name">Combined demo (if avaialable)</span> &middot; <a href="combined/demo" target="_blank">Demo</a>
     </section>
     <template is="dom-repeat" items="[[toElements(bower.dependencies)]]" as="element">
       <section>

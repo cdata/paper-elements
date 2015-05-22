@@ -19,11 +19,18 @@ cp ./element-page-tools/index.html ./$repo
 cp ./element-page-tools/element-gallery.html ./$repo
 cp ./bower.json ./$repo
 
+if [ -d "./demo" ]; then
+  mkdir -p ./$repo/combined
+  cp -r ./demo ./$repo/combined
+fi
+
 git add .
 git commit -m "Automated gh-pages deployment."
 
 git subtree push -P $repo origin gh-pages
 git reset --hard origin/master
+
+rm -rf ./$repo
 
 set +x
 set +e
