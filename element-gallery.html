@@ -1,0 +1,52 @@
+<link rel="import" href="./polymer/polymer.html">
+<link rel="import" href="./iron-ajax/iron-ajax.html">
+<link rel="import" href="./paper-styles/paper-styles.html">
+
+<dom-module id="element-gallery">
+  <style>
+    section {
+      display: block;
+      padding: 0.25em;
+    }
+
+    .name {
+      @apply(--paper-font-body1);
+      font-weight: bold;
+    }
+  </style>
+  <template>
+    <iron-ajax url="./bower.json" last-response="{{bower}}" auto>
+    <section>
+      <span class="name">Combined demo (if avaialable)</span> &middot; <a href="combined/demo" target="_blank">Demo</a>
+    </section>
+    <template is="dom-repeat" items="[[toElements(bower.dependencies)]]" as="element">
+      <section>
+        <span class="name">{{element.name}}</span> &middot; <a href="{{element.demo}}" target="_blank">Demo</a> &middot; <a href="{{element.issues}}" target="_blank">Issues</a>
+      </section>
+    </template>
+  </template>
+  <script>
+    Polymer({
+      is: 'element-gallery',
+
+      toElements: function(dependencies) {
+        return Object.keys(dependencies).map(function(key) {
+          return this.toElement(dependencies[key]);
+        }, this);
+      },
+
+      toElement: function(dependency) {
+        var dependencyParts = dependency.split('#');
+        var repoFragment = dependencyParts[0];
+        var elementParts = repoFragment.split('/');
+        var elementName = elementParts[1];
+
+        return {
+          name: elementName,
+          demo: elementName + '/demo',
+          issues: 'http://github.com/' + repoFragment + '/issues'
+        };
+      }
+    });
+  </script>
+</dom-module>
