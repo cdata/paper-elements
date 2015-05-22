@@ -16,7 +16,7 @@ rm -rf ./$repo/*
 cp -r ./bower_components/* ./$repo
 
 cp ./element-page-tools/index.html ./$repo
-cp ./element-page-tools/index.html ./$repo
+cp ./element-page-tools/element-gallery.html ./$repo
 cp ./bower.json ./$repo
 
 git add .
